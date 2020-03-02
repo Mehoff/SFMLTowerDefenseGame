@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
+#include "Player.h"
+#include "Tower.h"
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!", sf::Style::Close);
+
+	Tower t;
 
 	while (window.isOpen())
 	{
@@ -15,8 +17,18 @@ int main()
 				window.close();
 		}
 
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) 
+		{
+			t.MoveTo((sf::Vector2f)sf::Mouse::getPosition(window));
+		}
+
+		//Closes game
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) { window.close(); }
+
+		
+
 		window.clear();
-		window.draw(shape);
+		window.draw(t.getRect());
 		window.display();
 	}
 
