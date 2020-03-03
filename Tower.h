@@ -5,12 +5,16 @@
 class Tower 
 {
 private:
-	sf::RectangleShape rect;
+	int id = 1;
+	sf::Sprite sprite;
+	sf::Texture texture;
 	sf::Vector2f pos;
+	std::string t_path = "./images/tower.png";
 public:
 	Tower();
 	Tower(sf::Vector2f pos);
-	sf::RectangleShape getRect();
+	sf::Sprite getSprite();
 	void Shoot();
 	void MoveTo(sf::Vector2f coords);
+	int getId();
 };

@@ -1,30 +1,40 @@
 #include <SFML/Graphics.hpp>
-#include "Tower.h"
 #include <iostream>
+#include "Tower.h"
+#include "SpriteRenderer.h"
+
+
 Tower::Tower()
 {
-	rect.setPosition(pos);
-	rect.setSize(sf::Vector2f(50.f, 50.f));
-	rect.setFillColor(sf::Color::Red);
+	// dont forget about id
+	if (!texture.loadFromFile(t_path))
+	{
+		std::cout << "err" << std::endl;
+	}
+	sprite.setTexture(texture);
+	sprite.setPosition(pos);
+
+	Renderer::getInstance()->Add(this->getSprite());
 }
 Tower::Tower(sf::Vector2f pos) 
 {
-	rect.setPosition(pos);
-	rect.setSize(sf::Vector2f(50.f, 50.f));
-	rect.setFillColor(sf::Color::Red);
+	if (!texture.loadFromFile(t_path))
+	{
+		std::cout << "err" << std::endl;
+	}
+	sprite.setTexture(texture);
+	sprite.setPosition(pos);
+
+
+	Renderer::getInstance()->Add(this->getSprite());
+
 }
 
+sf::Sprite Tower::getSprite() { return sprite; }
 
 
-sf::RectangleShape Tower::getRect() { return rect; }
-void Tower::Shoot()
-{
-	//...
-}
 void Tower::MoveTo(sf::Vector2f coords) 
 {
-	this->pos = sf::Vector2f(coords.x - (rect.getSize().x / 2), coords.y - (rect.getSize().y / 2));
-	std::cout << "X: " << pos.x << "  Y: " << pos.y << std::endl;
-	rect.setPosition(pos);
-
+	this->pos = sf::Vector2f(coords.x - (texture.getSize().x / 2), coords.y - (texture.getSize().y / 2));
+	sprite.setPosition(pos);
 }
