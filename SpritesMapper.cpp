@@ -22,6 +22,6 @@ std::string SpritesMapper::getPathById(int _id)
 	{
 		if (mapper[i].id == _id) { return mapper[i].path; }
 	}
-	std::cout << "Wrong mapper id" << std::endl;
+	std::cout << "Wrong mapper id(" << _id << ")" << std::endl;
 	return "null";
 }

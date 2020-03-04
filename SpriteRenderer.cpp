@@ -13,11 +13,6 @@ void Renderer::Draw(sf::RenderWindow& window) {
 		window.draw(item);
 	}
 }
-//void Renderer::Add(sf::Sprite s) 
-//{
-//
-//	_instance->toDraw.push_back(s);
-//}
 
 void Renderer::Add(sf::Sprite & s)
 {
