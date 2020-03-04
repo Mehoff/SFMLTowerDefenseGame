@@ -9,11 +9,14 @@ private:
 	sf::Sprite sprite;
 	sf::Texture texture;
 	sf::Vector2f pos;
-	std::string t_path = "./images/tower.png";
 public:
 	Tower();
 	Tower(sf::Vector2f pos);
+	Tower(const Tower& other);
+	Tower& operator=(const Tower& other);
 	sf::Sprite getSprite();
+	sf::Vector2f getPosition();
+	void MoveRight();
 	void Shoot();
 	void MoveTo(sf::Vector2f coords);
 	int getId();

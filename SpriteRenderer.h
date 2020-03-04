@@ -15,7 +15,10 @@ private:
 
 public:
 
-	void Add(sf::Sprite); //change to Sprite
+	//void Add(sf::Sprite s);
+
+	void Add(sf::Sprite & s);
+	//void Add(Tower& tower);
 	void Draw(sf::RenderWindow& window);
 
 	static Renderer* getInstance()
