@@ -3,11 +3,21 @@
 Object::Object() 
 {
 	std::cout << "Object()" << std::endl;
+	if (!texture.loadFromFile(SpritesMapper::getInstance()->getPathById(id)))
+	{
+		std::cout << "err" << std::endl;
+	}
+	sprite.setTexture(texture);
 }
 
 Object::Object(sf::Vector2f _position)
 : position(_position)
 {
+	if (!texture.loadFromFile(SpritesMapper::getInstance()->getPathById(id)))
+	{
+		std::cout << "err" << std::endl;
+	}
+	sprite.setTexture(texture);
 	std::cout << "Object(Vector2f)" << std::endl;
 }
 
@@ -23,10 +33,10 @@ Object::Object(const Object& other)
 }
 
 //Getters
-int Object::getId() { return id; }
-sf::Vector2f Object::getPosition() { return position; }
-sf::Sprite Object::getSprite() { return sprite; }
-sf::Texture Object::getTexture() { return texture; }
+int Object::getId() const  { return id; }
+sf::Vector2f Object::getPosition() const { return position; }
+sf::Sprite Object::getSprite()  const { return sprite; }
+sf::Texture Object::getTexture() const { return texture; }
 
 void Object::Draw(sf::RenderWindow& window) { window.draw(sprite); }
 void Object::UpdateSpritePosition() { sprite.setPosition(position); }

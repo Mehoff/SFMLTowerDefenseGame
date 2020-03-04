@@ -3,7 +3,6 @@
 #include <iostream>
 #include <map>
 #include <vector>
-
 #include <SFML/Graphics.hpp>
 
 
@@ -13,21 +12,15 @@ public:
 	int id;
 	std::string path;
 
-	// test
-	sf::Texture txt;
-
-
 	path_sprite_struct(int _id, std::string _path)
 		:id(_id), path(_path)
-	{
-		txt.loadFromFile(_path);
-	}
+	{}
 };
 
 class SpritesMapper 
 {
 private:
-
+	std::map<std::string, sf::Texture> textureMap;
 	static SpritesMapper* _instance;
 	SpritesMapper() { }
 	SpritesMapper(const SpritesMapper&) {}
@@ -35,6 +28,7 @@ private:
 	void Add(int _id, std::string _path);
 public:
 
+	sf::Texture getTexture(const std::string& _id) const;
 	
 	void Load();
 	std::string getPathById(int _id);
@@ -50,3 +44,6 @@ public:
 	}
 
 };
+
+#define SMapper SpritesMapper::getInstance()
+// <3

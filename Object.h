@@ -3,6 +3,9 @@
 #include <iostream>
 #include "SpritesMapper.h"
 
+
+// TRY inherit from sf::Sprite mybe its a lot of fun
+
 class Object abstract
 {
 protected:
@@ -20,10 +23,10 @@ public:
 
 	~Object() { std::cout << "'Object' destroyed"; }
 
-	sf::Sprite getSprite();
-	sf::Vector2f getPosition();
-	sf::Texture getTexture();
-	int getId();
+	sf::Sprite getSprite() const;
+	sf::Vector2f getPosition() const;
+	sf::Texture getTexture() const;
+	int getId() const;
 
 	void Draw(sf::RenderWindow& window);
 	void UpdateSpritePosition();

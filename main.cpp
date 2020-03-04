@@ -25,11 +25,10 @@ void SpawnTower(std::vector<Object*> &vec, sf::Vector2f coords)
 
 int main()
 {
-	SpritesMapper::getInstance()->Load();
+	SMapper->Load();
 
 	std::vector<Object*> objects;
 	objects.reserve(50);
-
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Tower Defence", sf::Style::Close);
 
@@ -48,6 +47,7 @@ int main()
 		{
 			if (isSpaceEmpty((sf::Vector2f)sf::Mouse::getPosition(window), objects))
 			{
+				//Manager::Spawn(...)
 				SpawnTower(objects, (sf::Vector2f)sf::Mouse::getPosition(window));
 			}
 		}
@@ -55,19 +55,8 @@ int main()
 		//Closes game
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) { window.close(); }
 
-		
-
 		window.clear();
-		
-
-		//does`not work, but have to
-		//Renderer::getInstance()->Draw(window);
-
 		for (auto a : objects) { a->Draw(window); }
-
-		// Works
-		//for (int i = 0; i < towers.size(); i++) { window.draw(towers[i].getSprite()); }
-
 		window.display();
 	}
 

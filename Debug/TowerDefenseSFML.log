@@ -1,2 +1,8 @@
-﻿  Tower.cpp
+﻿  Object.cpp
+  SpriteRenderer.cpp
+  SpritesMapper.cpp
+F:\Code\SFMLTowerDefenseGame\SpritesMapper.cpp(21,20): warning C4018: <: несоответствие типов со знаком и без знака
+  Tower.cpp
+  main.cpp
+  Создание кода...
   TowerDefenseSFML.vcxproj -> F:\Code\SFMLTowerDefenseGame\Debug\TowerDefenseSFML.exe
