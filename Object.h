@@ -9,7 +9,7 @@
 class Object abstract
 {
 protected:
-	int id = 0;
+	std::string id = "object";
 	sf::Texture texture;
 	sf::Sprite sprite;
 	sf::Vector2f position;
@@ -26,7 +26,7 @@ public:
 	sf::Sprite getSprite() const;
 	sf::Vector2f getPosition() const;
 	sf::Texture getTexture() const;
-	int getId() const;
+	std::string getId() const;
 
 	void Draw(sf::RenderWindow& window);
 	void UpdateSpritePosition();

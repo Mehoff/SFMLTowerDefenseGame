@@ -7,6 +7,10 @@
 #include "SpritesMapper.h"
 
 
+
+
+
+
 bool isSpaceEmpty(sf::Vector2f coords, std::vector<Object*> &vec) 
 {
 
@@ -26,6 +30,7 @@ void SpawnTower(std::vector<Object*> &vec, sf::Vector2f coords)
 int main()
 {
 	SMapper->Load();
+
 
 	std::vector<Object*> objects;
 	objects.reserve(50);

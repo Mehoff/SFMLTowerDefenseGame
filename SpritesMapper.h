@@ -6,16 +6,6 @@
 #include <SFML/Graphics.hpp>
 
 
-struct path_sprite_struct 
-{
-public:
-	int id;
-	std::string path;
-
-	path_sprite_struct(int _id, std::string _path)
-		:id(_id), path(_path)
-	{}
-};
 
 class SpritesMapper 
 {
@@ -24,14 +14,11 @@ private:
 	static SpritesMapper* _instance;
 	SpritesMapper() { }
 	SpritesMapper(const SpritesMapper&) {}
-	std::vector<path_sprite_struct> mapper;
-	void Add(int _id, std::string _path);
 public:
 
 	sf::Texture getTexture(const std::string& _id) const;
-	
 	void Load();
-	std::string getPathById(int _id);
+
 
 	static SpritesMapper* getInstance() 
 	{
