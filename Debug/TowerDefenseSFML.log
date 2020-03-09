@@ -1,4 +1,3 @@
 ﻿  Object.cpp
-  SpritesMapper.cpp
-  Generating Code...
+C:\Users\Mihokw39\repos\SFMLTowerDefenseGame\Object.cpp(35,29): warning C4305:  'initializing': truncation from 'double' to 'float'
   TowerDefenseSFML.vcxproj -> C:\Users\Mihokw39\repos\SFMLTowerDefenseGame\Debug\TowerDefenseSFML.exe

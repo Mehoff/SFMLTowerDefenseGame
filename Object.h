@@ -13,6 +13,7 @@ protected:
 	sf::Texture texture;
 	sf::Sprite sprite;
 	sf::Vector2f position;
+	bool toDraw;
 public:
 
 	Object();
@@ -31,4 +32,5 @@ public:
 	void Draw(sf::RenderWindow& window);
 	void UpdateSpritePosition();
 	void UpdateSpritePosition(sf::Vector2f _position);
+	void RotateTo(sf::Vector2f _position);
 };

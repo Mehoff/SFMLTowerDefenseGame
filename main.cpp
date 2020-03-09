@@ -5,6 +5,7 @@
 #include "Tower.h"
 #include "SpriteRenderer.h"
 #include "SpritesMapper.h"
+#include <typeinfo>
 
 
 
@@ -56,6 +57,15 @@ int main()
 				SpawnTower(objects, (sf::Vector2f)sf::Mouse::getPosition(window));
 			}
 		}
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+		{
+			for (auto a : objects)
+			{
+				a->RotateTo((sf::Vector2f)sf::Mouse::getPosition(window));
+			}
+		}
+
 
 		//Closes game
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) { window.close(); }
