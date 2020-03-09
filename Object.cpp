@@ -34,10 +34,9 @@ void Object::RotateTo(sf::Vector2f _position)
 {
 	const float pi = 3.14159265;
 
-	//set a proper origin for sprite
+		//set a proper origin for sprite
 
-	
-	//rotate to mouse position
+		//rotate to mouse position
 	
 
 	float dx = this->position.x - _position.x;
@@ -46,8 +45,4 @@ void Object::RotateTo(sf::Vector2f _position)
 	float rotation = (atan2(dy, dx) * 180 / pi);
 
 	this->sprite.setRotation(rotation + 270);
-
-
-	
-
 }

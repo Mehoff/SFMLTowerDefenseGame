@@ -5,9 +5,13 @@ Tower::Tower()
 	std::cout << "Tower()";
     id = "tower";
 	toDraw = true;
+	ratio = 1.f;
+	damage = 10;
 }
 Tower::Tower(sf::Vector2f _position) 
 {
+	ratio = 1.f;
+	damage = 10;
 
 	std::cout << "Tower(position)";
 
@@ -30,4 +34,11 @@ Tower::Tower(sf::Vector2f _position)
 	sprite.setOrigin(newOrigin);
 
 }
+
+// IMPLEMENT 
+
+ void Tower::Draw(sf::RenderWindow& window) 
+ {
+	for (auto a : bulletVector) { a.Draw(window); }
+ }
 

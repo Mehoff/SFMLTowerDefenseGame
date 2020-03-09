@@ -66,8 +66,8 @@ int main()
 			}
 		}
 
-
 		//Closes game
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) { window.close(); }
 
 		window.clear();
