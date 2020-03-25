@@ -15,10 +15,7 @@ private:
 
 public:
 
-	//void Add(sf::Sprite s);
-
 	void Add(sf::Sprite & s);
-	//void Add(Tower& tower);
 	void Draw(sf::RenderWindow& window);
 
 	static Renderer* getInstance()
@@ -26,7 +23,6 @@ public:
 		if (!_instance)
 		{
 			_instance = new Renderer();
-			std::cout << "New Renderer" << std::endl;
 		}
 		return _instance;
 	}

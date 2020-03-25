@@ -6,32 +6,21 @@
 #include <SFML/Graphics.hpp>
 
 
-struct path_sprite_struct 
-{
-public:
-	int id;
-	std::string path;
-
-	path_sprite_struct(int _id, std::string _path)
-		:id(_id), path(_path)
-	{}
-};
-
 class SpritesMapper 
 {
 private:
-	std::map<std::string, sf::Texture> textureMap;
+	std::map<char, sf::Texture> textureMap;
 	static SpritesMapper* _instance;
 	SpritesMapper() { }
 	SpritesMapper(const SpritesMapper&) {}
-	std::vector<path_sprite_struct> mapper;
-	void Add(int _id, std::string _path);
+	void Add(std::string path, char id);
+
 public:
 
-	sf::Texture getTexture(const std::string& _id) const;
+	sf::Texture getTexture(const char & _id) const;
+	char getTextureCharByTextFileChar(const char& c) const;
 	
 	void Load();
-	std::string getPathById(int _id);
 
 	static SpritesMapper* getInstance() 
 	{

@@ -3,35 +3,84 @@
 
 SpritesMapper* SpritesMapper::_instance = 0;
 
-void SpritesMapper::Add(int _id, std::string _path) 
-{
-	this->_instance->mapper.push_back(path_sprite_struct(_id,_path));
-}
+
 
 void SpritesMapper::Load() 
 {
+	Add("./images/tower.png",		      't');
+	Add("./images/grass.png",		      'a');
+	Add("./images/corner_down_left.jpg",  'b');
+	Add("./images/corner_down_right.jpg", 'c');
+	Add("./images/corner_top_left.jpg",	  'd');
+	Add("./images/corner_top_right.jpg",  'e');
+	Add("./images/Spawner.jpg",           's');
+	Add("./images/enemy.png",			  'x');
+	Add("./images/Horizontal.jpg",		  'h');
+	Add("./images/Vertical.jpg",		  'v');
 
-	_instance->mapper.push_back(path_sprite_struct(1, "./images/tower.png"));
-	
-	std::cout << "Sprites are loaded to memory\n";
 }
 
-std::string SpritesMapper::getPathById(int _id)
+
+void SpritesMapper::Add(std::string path, char id) 
 {
-	for (int i = 0; i < mapper.size(); i++)
+	auto it = _instance->textureMap.begin();
+
+	sf::Texture txt;
+	if (!txt.loadFromFile(path)) 
 	{
-		if (mapper[i].id == _id) { return mapper[i].path; }
+		std::cout << "<!> Error while loading texture " << path << "\n";
 	}
-	std::cout << "Wrong mapper id(" << _id << ")" << std::endl;
-	return "null";
+	_instance->textureMap.insert(it, std::pair<char, sf::Texture>(id, txt));
+	std::cout << "<!> Loaded (" << path << ")\n";
 }
 
-sf::Texture SpritesMapper::getTexture(const std::string& _id) const
+sf::Texture SpritesMapper::getTexture(const char & _id) const
 {
 	auto it = textureMap.find(_id);
 	if (it != textureMap.end()) 
 	{
-		return it->second;
+		return it->second; //¬озвращаем текстуру в зависимости от ID
 	}
-	else { return sf::Texture(); }
+	else 
+	{
+		std::cout << "<!> Returned Blank Texture\n";
+		return sf::Texture(); 
+	}
+}
+
+char SpritesMapper::getTextureCharByTextFileChar(const char& c) const 
+{
+	switch (c)
+	{
+	case 'a': return 'd';
+		break;
+	case 'b': return 'b';
+		break;
+	case 'c': return 'e';
+		break;
+	case 'd': return 'd';
+		break;
+	case 'e': return 'e';
+		break;
+	case 'f': return 'c';
+		break;
+	case 'g': return 'b';
+		break;
+	case 'h': return 'c';
+		break;
+	case 'z': return 'a';
+		break;
+	case 'i': return 'h';
+		break;
+	case 'j': return 'h';
+		break;
+	case 'k': return 'v';
+		break;
+	case 'l': return 'v';
+		break;
+	case 's': return 's';
+		break;
+	default:
+		return 'a';
+	}
 }

@@ -3,16 +3,14 @@
 #include <iostream>
 #include "SpritesMapper.h"
 
-
-// TRY inherit from sf::Sprite mybe its a lot of fun
-
 class Object abstract
 {
 protected:
-	int id = 0;
+	char id = 'o';
 	sf::Texture texture;
 	sf::Sprite sprite;
 	sf::Vector2f position;
+	bool toDraw;
 public:
 
 	Object();
@@ -23,12 +21,13 @@ public:
 
 	~Object() { std::cout << "'Object' destroyed"; }
 
-	sf::Sprite getSprite() const;
-	sf::Vector2f getPosition() const;
-	sf::Texture getTexture() const;
-	int getId() const;
+	virtual sf::Sprite getSprite() const;
+	virtual sf::Vector2f getPosition() const;
+	virtual sf::Texture getTexture() const;
+	virtual char getId() const;
 
-	void Draw(sf::RenderWindow& window);
-	void UpdateSpritePosition();
-	void UpdateSpritePosition(sf::Vector2f _position);
+	virtual void Draw(sf::RenderWindow& window);
+	virtual void UpdateSpritePosition();
+	virtual void UpdateSpritePosition(sf::Vector2f _position);
+	//virtual void RotateTo(sf::Vector2f _position);
 };
