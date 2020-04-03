@@ -15,23 +15,16 @@ Chunk::Chunk(sf::Vector2f mousePosition)
 	Place(mousePosition);
 }
 
-Chunk::Chunk(int x, int y, char c) //Этот конструктор нам больше не понадобится, потом удалить
-{
-	texture = SMapper->getTexture(c); 
-	sprite.setTexture(texture);
-	Place(sf::Vector2f(x, y));
-}
-
 Chunk::Chunk(int x, int y, char c, int d)
 {
+	collisionRect.setSize(sf::Vector2f(1, 1));
+
 	texture = SMapper->getTexture(c);
 	sprite.setTexture(texture);
 	Place(sf::Vector2f(x, y));
 
 	turnDirection = d;
 }
-
-
 
 void Chunk::Place(sf::Vector2f mousePosition) 
 {
@@ -42,6 +35,8 @@ void Chunk::Place(sf::Vector2f mousePosition)
 	newPosition = mousePosition;
 
 	this->sprite.setPosition(newPosition);
+
+	this->collisionRect.setPosition(newPosition.x + 25, newPosition.y + 25);
 }
 
 void Chunk::Draw(sf::RenderWindow& window) 
@@ -53,5 +48,7 @@ sf::Sprite & Chunk::getSprite()
 {
 	return sprite;
 }
+
+sf::RectangleShape& Chunk::getCollisionRect() { return collisionRect; }
 
 int Chunk::getTurnDirection() { return turnDirection; }

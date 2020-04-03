@@ -21,10 +21,10 @@ public:
 
 	~Object() { std::cout << "'Object' destroyed"; }
 
-	virtual sf::Sprite getSprite() const;
-	virtual sf::Vector2f getPosition() const;
-	virtual sf::Texture getTexture() const;
-	virtual char getId() const;
+	virtual sf::Sprite & getSprite() ;
+	virtual sf::Vector2f &  getPosition() ;
+	virtual sf::Texture & getTexture() ;
+	virtual char & getId() ;
 
 	virtual void Draw(sf::RenderWindow& window);
 	virtual void UpdateSpritePosition();

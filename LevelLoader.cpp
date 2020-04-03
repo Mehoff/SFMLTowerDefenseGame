@@ -1,5 +1,6 @@
 #include "LevelLoader.h"
 #include <fstream>
+#include "Spawner.h"
 
 LevelLoader* LevelLoader::_instance = 0;
 
@@ -70,12 +71,20 @@ void LevelLoader::LoadLevel(int number)
 	
 	while ((FileChar = mapFile.get()) != EOF)
 	{ 
+
 		if (FileChar != '\n') // Достали символ, обработать, нарисовать нужную текстуру, и указать направление
 		{
 			_TextureChar = GetTextureChar(FileChar);
 			_RotateDirectionInt = GetRotateDirectionInt(FileChar);
 
-			ObjectsVector.push_back(new Chunk(_x, _y, _TextureChar, _RotateDirectionInt));
+			if (FileChar == 's') 
+			{
+				ObjectsVector.push_back(new Spawner(_x, _y, 5));
+			}
+			else
+			{
+				ObjectsVector.push_back(new Chunk(_x, _y, _TextureChar, _RotateDirectionInt));
+			}
 			_x += 50;
 		}
 		else				  // Переход на некст строку 

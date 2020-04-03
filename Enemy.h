@@ -7,17 +7,32 @@
 class Enemy : public Object 
 {
 private:
-	int speed;
+	sf::RectangleShape collisionRect;
+	float speed;
+	int health;
 	int moveDirection; // 1,2,3,4 ?
 	int moveRotation;  // 0-360
+	bool toDie;
 
 public:
+
 	Enemy(sf::Vector2f position);
+	~Enemy() {}
 
 	void CheckDirection(); //Проверяем над каким Чанком мы летим, если его dir_id не равен moveDirection -> Вызываем ChangeDirection(dir_id)
 	
 	void setDirection(int dir_id); //Меняем направление движения вместе с поворотом (градусы в moveRotation)
 
+	void getDamage(int _damage);
+
+	void updateRotation();
+
+	void updateMoveDirection();
+
 	void Draw(sf::RenderWindow& window);
+
+	void Die();
+
+	void DeleteTagged();
 
 };

@@ -3,6 +3,7 @@
 #include <vector>
 #include <typeinfo>
 
+#include "Enemy.h"
 #include "Objects.h"
 #include "Chunk.h"
 #include "LevelLoader.h"
@@ -15,23 +16,19 @@
 
 //		Общий TODO:
 
-//	Механика "Присасывания" пули к врагу
-//	Механика поиска противника башней по радиусу
-//	Коллизия пуль с врагами
-//	Враги (Дописать)
-//	Спавнер (Дописать)
-//	Механика поворота врагов при встрече тайла с поворотом
+
+//	Нарисовать тайл для замка куда летят враги
+//	Класс для игрока (Деньги, выбранная вышка, здоровье)
+//	Визуальные эффекты и тематический тайлсет
 //	Подчистить ненужные функции и файлы
 //	Звук
-//	Класс для игрока (Деньги, выбранная вышка)
 //	Шрифты
 //	Меню
-//	Визуальные эффекты и тематический тайлсет
+
+
+
 //	Больше Уровней
 //	Редактор Уровней
-
-
-
 
 
 bool isSpaceEmpty(sf::Vector2f coords) // Rework to check 'Object' objects
@@ -57,13 +54,10 @@ int main()
 	SMapper->Load();
 	LevelManager->LoadLevel(1);
 
-	//std::vector<Object*> objects; // Move to Singleton class, and reference to it using define
-
-	//objects.reserve(50);
-
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Tower Defence", sf::Style::Close);
 
 	window.setFramerateLimit(60);
+	window.setKeyRepeatEnabled(false);
 
 	while (window.isOpen())
 	{
@@ -82,44 +76,33 @@ int main()
 			}
 		}
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 		{
 			for (auto a : ObjectsVector)
 			{
 				if (dynamic_cast<Tower*>(a)) {
 					auto t = dynamic_cast<Tower*>(a);
-					t->RotateTo((sf::Vector2f)sf::Mouse::getPosition(window));
+					t->setRadius(t->getRadius().getRadius() + 1);
 				}
 			}
 		}
-	
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) { 
-
-			bool flag = false;
-
-			for (auto c : ObjectsVector)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		{
+			for (auto a : ObjectsVector)
 			{
-				if (c->getSprite().getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(window))) 
-				{
-					flag = true;
-					break;
+				if (dynamic_cast<Tower*>(a)) {
+					auto t = dynamic_cast<Tower*>(a);
+					t->setRadius(t->getRadius().getRadius() - 1);
 				}
 			}
-			if (!flag) 
-			{
-
-				ObjectsVector.push_back(new Chunk((sf::Vector2f)sf::Mouse::getPosition(window)));
-			}
-			
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) { window.close(); }
 
 		window.clear();
 
-		 //Move to Objects and sort to be at start
 		
-		for (auto a : ObjectsVector) 
+		for (auto & a : ObjectsVector) 
 		{
 			if (dynamic_cast<Tower*>(a)) 
 			{
@@ -129,9 +112,16 @@ int main()
 			{
 				a->Draw(window);
 			}
+			if(dynamic_cast<Enemy*>(a))
+			{
+				a->Draw(window);
+			}
+			else { a->Draw(window); }
+			
 		}
 		window.display();
 	}
 
 	return 0;
 }
+

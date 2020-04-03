@@ -1,0 +1,2 @@
+E:\Code\SFMLTowerDefenseGame\Debug\TowerDefenseSFML.exe
+E:\Code\SFMLTowerDefenseGame\Debug\TowerDefenseSFML.pdb

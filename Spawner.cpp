@@ -14,19 +14,38 @@ Spawner::Spawner()
 	this->id = 's';
 	this->texture = SMapper->getTexture(this->id);
 	sprite.setTexture(this->texture);
+}
 
-	// Origin?...
+Spawner::Spawner(int _x, int _y, int s_ratio) 
+{
+	SpawnRatio = s_ratio;
+	this->id = 's';
+	this->texture = SMapper->getTexture(this->id);
+	sprite.setTexture(this->texture);
 
+	position.x = _x;
+	position.y = _y;
+
+	sprite.setPosition(position);
 }
 
 void Spawner::Draw(sf::RenderWindow& window) 
 {
-	if (SpawnRatioClock.getElapsedTime().asSeconds() >= 5) { SpawnEnemy(); SpawnRatioClock.restart(); }
+	if (SpawnRatioClock.getElapsedTime().asSeconds() >= SpawnRatio)
+	{
+		SpawnEnemy(); 
+		SpawnRatioClock.restart(); 
+	}
+	window.draw(this->sprite);
 }
 
 void Spawner::SpawnEnemy() 
 {	
-	ObjectsVector.push_back(new Enemy(sprite.getPosition())); 
+	sf::Vector2f newPos = sf::Vector2f(sprite.getPosition().x + 25, sprite.getPosition().y + 25);
+
+	ObjectsVector.push_back(new Enemy(newPos)); 
+
+
 }
 
 

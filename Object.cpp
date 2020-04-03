@@ -20,10 +20,10 @@ Object::Object(const Object& other)
 }
 
 //Getters
-char Object::getId() const  { return id; }
-sf::Vector2f Object::getPosition() const { return position; }
-sf::Sprite Object::getSprite()  const { return sprite; }
-sf::Texture Object::getTexture() const { return texture; }
+char & Object::getId()   { return id; }
+sf::Vector2f  & Object::getPosition()  { return position; }
+sf::Sprite & Object::getSprite()   { return sprite; }
+sf::Texture & Object::getTexture()  { return texture; }
 
 void Object::Draw(sf::RenderWindow& window) {if(toDraw) window.draw(sprite);}
 void Object::UpdateSpritePosition() 

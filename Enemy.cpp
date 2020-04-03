@@ -1,56 +1,134 @@
 #include "Enemy.h"
 
+#include "Tower.h"
 
 Enemy::Enemy(sf::Vector2f position) 
 {
+
+	std::cout << "Enemy()\n";
+
+	collisionRect.setSize(sf::Vector2f(1, 1));
+	
+	toDie = false;
+	health = 50;
 	toDraw = true;
 	id = 'x';
 	texture = SMapper->getTexture(id);
 	
+	speed = 1.f;
+	moveDirection = 4;
 
 	sprite.setTexture(texture);
+	sprite.setRotation(90);
 
 	this->position = position;
 	sprite.setPosition(this->position);
 
-	// ??
-	sf::Vector2f newOrigin((sprite.getGlobalBounds().width / 2), (sprite.getGlobalBounds().height / 2));
-	sprite.setOrigin(newOrigin);
+	sf::Vector2f neworigin((sprite.getGlobalBounds().width / 2), (sprite.getGlobalBounds().height / 2));
+	sprite.setOrigin(neworigin);
+	collisionRect.setOrigin(neworigin);
+	collisionRect.setPosition(sprite.getPosition().x, sprite.getPosition().y);
 }
-
-
-// NOT TESTED :
 
 void Enemy::CheckDirection()
 {
-	for(int i = 0; i < ObjectsVector.size() - 1; i++)
-	{
-		if (dynamic_cast<Chunk*>(ObjectsVector[i]))
-		{
-			auto chunk = dynamic_cast<Chunk*>(ObjectsVector[i]);
-			this->setDirection(chunk->getTurnDirection());
+	//std::cout << "CheckDirection()\n";
 
-			delete chunk;
+	for (auto& obj : ObjectsVector) 
+	{
+		if (dynamic_cast<Chunk*>(obj)) 
+		{
+			auto c = dynamic_cast<Chunk*>(obj);
+
+			if (collisionRect.getGlobalBounds().intersects(c->getCollisionRect().getGlobalBounds())) 
+			{
+				this->setDirection(c->getTurnDirection());
+			}
 		}
 	}
 }
 
 void Enemy::setDirection(int _dir_id) 
 {
-	this->moveDirection = _dir_id;
+	//std::cout << "setDirection()\n";
 
-	// Простенькая логика поворота на 360* в зависимости от dir_id
+	this->moveDirection = _dir_id;
+	updateRotation();
 }
 
-// 1 - UP , 2 - DOWN, 3 - LEFT, 4 - RIGHT   0 - default
+void Enemy::getDamage(int _damage) 
+{
+	//std::cout << "Got Damage\n";
 
-void Enemy::Draw(sf::RenderWindow& window) 
+	this->health -= _damage;
+	if (this->health <= 0) { Die(); }
+}
+
+void Enemy::Die() 
+{
+	toDie = true;
+}
+
+void Enemy::updateRotation() 
 {
 
-	//Хочу вынести логику перемещения в отдельную функцию, чтобы делать проверку только когда позиция (pos % 25 == true)
+	//std::cout << "updateRotation()\n";
 
-	int toX = 0;
-	int toY = 0;
+	switch (moveDirection)
+	{
+	case 1: sprite.setRotation(0);
+		break;
+	case 2: sprite.setRotation(180);
+		break;
+	case 3: sprite.setRotation(270);
+		break;
+	case 4: sprite.setRotation(90);
+		break;
+	default:
+		sprite.setRotation(0);
+		break;
+	}
+}
+// 1 - UP , 2 - DOWN, 3 - LEFT, 4 - RIGHT   0 - default
+
+
+//TODO:
+// Optimize MoveDirection
+
+void Enemy::DeleteTagged() 
+{
+	for (int i = ObjectsVector.size() - 1; i > 0; i--) 
+	{
+		if (dynamic_cast<Enemy*>(ObjectsVector[i]))
+		{
+			auto ref = dynamic_cast<Enemy*>(ObjectsVector[i]);
+
+			if (ref->toDie == true) 
+			{
+				std::cout << "Ship Dead\n";
+				ObjectsVector.erase(ObjectsVector.begin() + i);
+
+				// Call Remap Targets Function
+				
+				Tower::RemapTargets();
+				
+			}
+		}
+	}
+}
+
+
+
+void Enemy::Draw(sf::RenderWindow& window)
+{
+
+	if ((int)this->sprite.getPosition().x % 25 == 0 && (int)this->sprite.getPosition().y % 25 == 0) 
+	{
+		CheckDirection();
+	}
+
+	float toX = 0;
+	float toY = 0;
 
 	switch (this->moveDirection)
 	{
@@ -58,7 +136,7 @@ void Enemy::Draw(sf::RenderWindow& window)
 		  break;
 	case 2: {toX = 0; toY = speed; }
 		  break;
-	case 3: {toX = speed*-1; toY = 0; }
+	case 3: {toX = speed * -1; toY = 0; }
 		  break;
 	case 4: {toX = speed; toY = 0; }
 		  break;
@@ -68,6 +146,15 @@ void Enemy::Draw(sf::RenderWindow& window)
 		break;
 	}
 
+
 	this->sprite.move(toX, toY);
+	this->position = sprite.getPosition();
+	this->collisionRect.setPosition(position.x + 25, position.y + 25);
+
+
+	//Delete Tagged
+	DeleteTagged();
+
 	window.draw(this->sprite);
 }
+
