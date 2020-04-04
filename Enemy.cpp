@@ -2,6 +2,10 @@
 
 #include "Tower.h"
 
+#include "GameManager.h"
+
+#include "UI.h"
+
 Enemy::Enemy(sf::Vector2f position) 
 {
 
@@ -107,7 +111,9 @@ void Enemy::DeleteTagged()
 			{
 				std::cout << "Ship Dead\n";
 				ObjectsVector.erase(ObjectsVector.begin() + i);
-
+				GManager->getPlayer().getMoney() += Price;
+				UIManager->UpdateUI();
+				
 				// Call Remap Targets Function
 				
 				Tower::RemapTargets();

@@ -7,6 +7,9 @@
 class Enemy : public Object 
 {
 private:
+
+	const int Price = 10;
+
 	sf::RectangleShape collisionRect;
 	float speed;
 	int health;
@@ -15,6 +18,8 @@ private:
 	bool toDie;
 
 public:
+
+
 
 	Enemy(sf::Vector2f position);
 	~Enemy() {}

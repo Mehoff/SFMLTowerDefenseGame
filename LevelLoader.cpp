@@ -57,6 +57,8 @@ void LevelLoader::LoadLevel(int number)
 	// Clear Towers, Bullet, Chunks
 	// Open file for read and Load Level
 
+	// NOT TESTED
+
 	ObjectsVector.clear();
 
 	char FileChar = NULL;

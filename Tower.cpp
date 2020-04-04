@@ -1,19 +1,14 @@
 #include "Tower.h"
-
+#include "GameManager.h"
+#include "UI.h"
 
 //LVLUPS WILL INCREASE SPEED OF BULLET AND INCREASE RADIUS
 
- Tower::Tower() 
-{
-    id = 't';
-	toDraw = true;
-	ratio = 5;
-	damage = 10;
-}
  Tower::Tower(sf::Vector2f _position) 
 {
+	 chosen = false;
 	 target = nullptr;
-	 ratio = 1;
+	 ratio = 1.f;
 	 turnRatio = 0.3f;
 	 toShoot = false;
 	 damage = 10;
@@ -80,8 +75,11 @@
 	 {
 		 CheckForEnemy();
 	 }
-
-	 if (drawRadius) { window.draw(radius); }
+	 if (chosen) 
+	 {
+		 window.draw(radius);
+	 }
+	 //if (drawRadius) { window.draw(radius); }
 
 	 DestroyTaggedBullets();
  }
@@ -122,6 +120,20 @@
 	 }
  }
 
+
+ void Tower::Upgrade() 
+ {
+	 if (GManager->getPlayer().getMoney() >= Tower::UpgradePrice)
+	 {
+		 GManager->getPlayer().getMoney() -= Tower::UpgradePrice;
+		 ratio -= 0.2;
+		 damage += 5;
+		 setRadius(radius.getRadius() + 20);
+		 sprite.setColor(sf::Color::Yellow);
+		 
+		 UIManager->UpdateUI();
+	 }
+ }
 
  void Tower::RemapTargets() 
  {
@@ -227,22 +239,22 @@
  {
 	 if (bulletVector.size() == 1 && bulletVector[bulletVector.size() - 1].isDying()) 
 	 { 
-		 std::cout << "BulletVector Clear()\n";
+		 
 		 bulletVector.clear(); 
 	 }
 	 // Lol this thing fixed issue omgwtf
 
-	 for (int i = bulletVector.size() - 1; i > 0; i--) 
+	 for (int i = bulletVector.size() - 1; i >= 0; --i) 
 	 {
 		 if (bulletVector[i].isDying()) 
 		 {
-			 std::cout << "Bullet Destroyed (collision)\n";
+			
 			 bulletVector.erase(bulletVector.begin() + i);
 			 continue;
 		 }
 		 if (bulletVector[i].getClock().getElapsedTime().asSeconds() >= bulletVector[i].getLifeTime()) 
 		 {
-			 std::cout << "Bullet Destroyed (life)\n";
+			
 			 bulletVector.erase(bulletVector.begin() + i);
 		 }
 

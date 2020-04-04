@@ -1,0 +1,6 @@
+﻿  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+E:\Code\SFMLTowerDefenseGame\Bullet.cpp(122): warning C4715: Bullet::getTargetPosition: значение возвращается не при всех путях выполнения
+  All 508 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  TowerDefenseSFML.vcxproj -> E:\Code\SFMLTowerDefenseGame\Release\TowerDefenseSFML.exe

@@ -8,13 +8,15 @@ class Tower : public Object
 private:
 
 
+	bool chosen;
+
 	Enemy * target;
 	sf::CircleShape radius;
 	void constructRadiusShape();
 
 
 	sf::Clock ratioClock;
-	int ratio;
+	float ratio;
 
 	sf::Clock turnClock;
 	float turnRatio;
@@ -26,15 +28,21 @@ private:
 	void Place(sf::Vector2f _position);
 	void CheckForEnemy();
 
-public:
 	
-	Tower();
+
+public:
+	static const int Price = 50;
+	static const int UpgradePrice = 30;
+
+	
 	Tower(sf::Vector2f _position);
 	bool drawRadius;
+
 	
+
 	//set to private
 	void Shoot();
-
+	void Upgrade();
 
 //
 	// ~ Setters:
@@ -50,9 +58,9 @@ public:
 
 	void Draw(sf::RenderWindow& window);
 	void DestroyTaggedBullets();
+	void Choose() { chosen = true; }
 
-
-
+	bool& isChosen() { return chosen; }
 	static void RemapTargets();
 };
 

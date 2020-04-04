@@ -1,28 +1,28 @@
-﻿  Enemy.cpp
-  SpriteRenderer.cpp
-  Tower.cpp
-E:\Code\SFMLTowerDefenseGame\Tower.cpp(37,40): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+﻿  Tower.cpp
+E:\Code\SFMLTowerDefenseGame\MyText.h(32,24): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+E:\Code\SFMLTowerDefenseGame\MyText.h(32,21): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+E:\Code\SFMLTowerDefenseGame\MyText.h(34,29): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+E:\Code\SFMLTowerDefenseGame\Tower.cpp(32,40): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-E:\Code\SFMLTowerDefenseGame\Tower.cpp(38,40): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+E:\Code\SFMLTowerDefenseGame\Tower.cpp(33,40): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-E:\Code\SFMLTowerDefenseGame\Tower.cpp(64,21): warning C4018: <: несоответствие типов со знаком и без знака
-E:\Code\SFMLTowerDefenseGame\Tower.cpp(121,66): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
+E:\Code\SFMLTowerDefenseGame\Tower.cpp(59,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\Code\SFMLTowerDefenseGame\Tower.cpp(119,66): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-E:\Code\SFMLTowerDefenseGame\Tower.cpp(121,48): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
+E:\Code\SFMLTowerDefenseGame\Tower.cpp(119,48): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-E:\Code\SFMLTowerDefenseGame\Tower.cpp(207,30): warning C4305: инициализация: усечение из "double" в "float"
-  main.cpp
-  Создание кода...
+E:\Code\SFMLTowerDefenseGame\Tower.cpp(129,16): warning C4305: -=: усечение из "double" в "float"
+E:\Code\SFMLTowerDefenseGame\Tower.cpp(219,30): warning C4305: инициализация: усечение из "double" в "float"
   TowerDefenseSFML.vcxproj -> E:\Code\SFMLTowerDefenseGame\Debug\TowerDefenseSFML.exe
